@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mamba-company-contact-details-extractor": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mambalabsdev/mcp-company-contact-details-extractor"
+      ],
+      "env": {
+        "APIFY_TOKEN": "your-apify-token"
+      }
+    }
+  }
+}

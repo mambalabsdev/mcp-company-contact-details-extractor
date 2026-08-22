@@ -1,0 +1,29 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.mambabuilt/mcp-company-contact-details-extractor",
+  "description": "Find a company contact page and extract role emails, a phone number and a postal address.",
+  "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/mambalabsdev/mcp-company-contact-details-extractor",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@mambalabsdev/mcp-company-contact-details-extractor",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "APIFY_TOKEN",
+          "description": "Apify API token from https://console.apify.com/account/integrations",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
