@@ -62,7 +62,7 @@ Get your token at https://console.apify.com/account/integrations, paste it in, a
 
 ## Inputs
 
-- `company_domain` (optional): bare company domain, for example `stripe.com`. This is the lookup key and the join key for every other actor in the fleet.
+- `company_domain` (required by this tool): bare company domain, for example `stripe.com`. This is the lookup key and the join key for every other actor in the fleet. The tool returns an error naming the field when it is missing, before any run starts.
 - `company_name` (optional): used in the row and in logging. This tool gates addresses on the email domain rather than on the company name, so supplying a name does not change which addresses are kept.
 - `emailTypes` (optional): which classes of role address to return. One of `all`, `general`, `support`, `sales`, `privacy`, `general_support` or `sales_only`. `all` is the default and returns general, support, sales and privacy. The narrower settings return only what they name and leave the other columns null, which is a different answer from not finding one.
 - `includePhones` (optional): when true (the default) the contact page is scanned for a main phone number. Set false to skip phone extraction entirely.
@@ -71,9 +71,13 @@ Get your token at https://console.apify.com/account/integrations, paste it in, a
 - `crawlDepth` (optional): how many pages to read after the homepage. `1` (the default) reads the contact page. `2` also reads a support or legal page when the contact page yielded nothing. This is a cost and thoroughness dial, not a change of answer.
 - `skipCache` (optional): when false (the default) a successful lookup is cached for seven days and reused. Set true to force a fresh fetch.
 
+## How a call runs
+
+The tool starts the actor run and polls it to a finished status, so a long run is not cut off at 300 seconds. If the run is still going after 30 minutes, the call stops waiting and returns the run ID with a link to it in the Apify Console, where the results land when it finishes. A run that does not succeed comes back as an error with its run ID and status.
+
 ## Output
 
-The tool returns the actor's flat JSON row for the company, with 25 snake_case fields and no nested objects. `emails_rejected_count` and `emails_rejected_reasons` account for what was dropped, `contact_page_method` says how the contact page was found, and `fetch_status` says whether the read succeeded. See the Apify Store page for the full output schema.
+The tool returns the actor's flat JSON row for the company, with 27 snake_case fields and no nested objects. `emails_rejected_count` and `emails_rejected_reasons` account for what was dropped, `contact_page_method` says how the contact page was found, and `fetch_status` says whether the read succeeded. See the Apify Store page for the full output schema.
 
 ## Example output
 
@@ -95,9 +99,12 @@ The tool returns the actor's flat JSON row for the company, with 25 snake_case f
   "emails_rejected_reasons": "foreign_domain=5, not_a_role_address=1",
   "phone_main": null,
   "phone_source": null,
+  "phone_page": null,
   "address_line": null,
   "address_city": null,
   "address_country": null,
+  "address_source": null,
+  "address_page": null,
   "contact_form_url": null,
   "pages_read": 2,
   "coverage": 0.2,
@@ -113,7 +120,7 @@ The tool returns the actor's flat JSON row for the company, with 25 snake_case f
 - Contact page URL, plus how that page was found
 - Rejection accounting in `emails_rejected_reasons`, so a thin read is visible
 - Coverage reported per row
-- 25 flat snake_case fields, one row per company
+- 27 flat snake_case fields, one row per company
 
 ## Full actor documentation
 
