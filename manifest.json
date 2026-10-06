@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "mcp-company-contact-details-extractor",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "MCP server that find a company contact page and extract role emails, a phone number and a postal address.",
   "author": {
     "name": "Mamba Labs"
