@@ -73,7 +73,7 @@ Get your token at https://console.apify.com/account/integrations, paste it in, a
 
 ## How a call runs
 
-The tool starts the actor run and polls it to a finished status, so a long run is not cut off at 300 seconds. If the run is still going after 30 minutes, the call stops waiting and returns the run ID with a link to it in the Apify Console, where the results land when it finishes. A run that does not succeed comes back as an error with its run ID and status.
+The tool starts the actor run and polls it to a finished status, so a long run is not cut off at 300 seconds. The run is allowed 1,800 seconds. If it is still going two minutes after that, the call stops waiting and returns the run ID with a link to it in the Apify Console, where the results land when it finishes. A run that does not succeed comes back as an error with its run ID and status.
 
 ## Output
 

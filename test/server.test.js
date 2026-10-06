@@ -19,7 +19,7 @@ const ACTOR_INPUTS = ["allowFreeMailboxes","company_domain","company_name","craw
 const TOOL_INPUTS = ["allowFreeMailboxes","company_domain","company_name","crawlDepth","emailTypes","includeAddress","includePhones","skipCache"];
 const TOOL_REQUIRED = [];
 const SAMPLE_ARGS = {"company_domain":"stripe.com"};
-const RUN_QUERY = "?memory=512";
+const RUN_QUERY = "?timeout=1800&memory=512";
 
 // Speak MCP over stdio to the built server. extraEnv and preload let a test
 // swap in the fake Apify API from helpers/mock-fetch.mjs.
