@@ -186,12 +186,13 @@ server.registerTool("extract_company_contact_details", {
     description: "Find a company's contact page from its domain and extract classified ROLE email addresses (general, support, sales, privacy), a main phone number in E.164 where the country resolves, and a postal address. Returns one flat Clay ready row. Named individuals are NEVER returned: an address is kept only when its domain belongs to the company and its local part is in the role vocabulary, so a person's address is dropped by an allow list rather than by a name detector. The row reports how many addresses were found and how many were rejected and why, so a thin result is never mistaken for a site that publishes nothing. Read only; requires an APIFY_TOKEN and consumes Apify credits per call.",
     annotations: {
         title: "Extract Company Contact Details",
-        readOnlyHint: true,
+        readOnlyHint: false,
         destructiveHint: false,
         idempotentHint: true,
         openWorldHint: true,
     },
     inputSchema: {
+        max_charge_usd: z.number().min(0).optional().describe("Optional. The run stops before its event charges pass this amount, for example 2.50. Every row already charged is kept. Leave empty for no cap beyond the maximum cost per run you set in Apify, which is also honored."),
         company_domain: z.string()
             .optional()
             .describe("Bare company domain, for example stripe.com. Needed on every call: the tool returns an error naming this field when it is missing. It is the join key for every other actor in the fleet."),
@@ -217,7 +218,7 @@ server.registerTool("extract_company_contact_details", {
             .optional()
             .describe("When \"false\" (default) a successful lookup is cached for seven days and reused, which costs you nothing on a repeated run. Set \"true\" to force a fresh fetch. Sent as a string for Clay compatibility."),
     },
-}, async ({ company_domain, company_name, emailTypes, includePhones, includeAddress, allowFreeMailboxes, crawlDepth, skipCache }) => {
+}, async ({ company_domain, company_name, emailTypes, includePhones, includeAddress, allowFreeMailboxes, crawlDepth, skipCache, max_charge_usd }) => {
     if (company_domain === undefined || company_domain.trim() === "") {
         return {
             isError: true,
@@ -225,6 +226,7 @@ server.registerTool("extract_company_contact_details", {
         };
     }
     return runActor("4mMncKaJykiq94grz", "Company Contact Details Extractor", compact({
+        max_charge_usd,
         company_domain,
         company_name,
         emailTypes,

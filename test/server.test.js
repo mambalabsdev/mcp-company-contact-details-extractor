@@ -14,9 +14,9 @@ const TOOL_NAME = "extract_company_contact_details";
 const ACTOR_ID = "4mMncKaJykiq94grz";
 // Every input the live actor exposes to a buyer must be exposed by the tool.
 // Excluded by rule: source_tag (internal or test only fields).
-const ACTOR_INPUTS = ["allowFreeMailboxes","company_domain","company_name","crawlDepth","emailTypes","includeAddress","includePhones","skipCache"];
+const ACTOR_INPUTS = ["max_charge_usd","allowFreeMailboxes","company_domain","company_name","crawlDepth","emailTypes","includeAddress","includePhones","skipCache"];
 // The tool's full input list, so a dropped or renamed parameter fails here.
-const TOOL_INPUTS = ["allowFreeMailboxes","company_domain","company_name","crawlDepth","emailTypes","includeAddress","includePhones","skipCache"];
+const TOOL_INPUTS = ["max_charge_usd","allowFreeMailboxes","company_domain","company_name","crawlDepth","emailTypes","includeAddress","includePhones","skipCache"];
 const TOOL_REQUIRED = [];
 const SAMPLE_ARGS = {"company_domain":"stripe.com"};
 const RUN_QUERY = "?timeout=1800&memory=512";
