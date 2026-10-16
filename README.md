@@ -70,6 +70,7 @@ Get your token at https://console.apify.com/account/integrations, paste it in, a
 - `allowFreeMailboxes` (optional): when false (the default) an address at Gmail, Outlook or another free provider is rejected, because it cannot be checked against the company domain. Set true for small business and local company lists, where a free mailbox on the contact page is often the real contact point.
 - `crawlDepth` (optional): how many pages to read after the homepage. `1` (the default) reads the contact page. `2` also reads a support or legal page when the contact page yielded nothing. This is a cost and thoroughness dial, not a change of answer.
 - `skipCache` (optional): when false (the default) a successful lookup is cached for seven days and reused. Set true to force a fresh fetch.
+- `max_charge_usd` (optional): a cost cap in USD for this run. The actor stops before an item that could take its charges past this amount. Omit it to rely on the maximum cost per run set in Apify.
 
 ## How a call runs
 
@@ -121,6 +122,17 @@ The tool returns the actor's flat JSON row for the company, with 27 snake_case f
 - Rejection accounting in `emails_rejected_reasons`, so a thin read is visible
 - Coverage reported per row
 - 27 flat snake_case fields, one row per company
+
+## Pricing
+
+Price per event on the Apify FREE plan, from the live pricing record; paid Apify plans pay less per event.
+
+| Event | Price (USD) |
+| --- | --- |
+| Actor Start (`apify-actor-start`) | 0.00005 |
+| Company checked (`company-checked`) | 0.0035 |
+| Contact page found (`contact-page-found`) | 0.0025 |
+| Email extracted (`email-extracted`) | 0.003 |
 
 ## Full actor documentation
 
