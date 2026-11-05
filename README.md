@@ -4,7 +4,7 @@
 
 <a href="https://mcprush.com/to/company-contact-details-extractor-mcp?ref=badge"><img width="380" height="200" src="https://mcprush.com/badge/company-contact-details-extractor-mcp/card.svg" alt="Company Contact Details Extractor MCP server" /></a>
 
-An MCP server that finds a company contact page and extracts role emails, a phone number and a postal address. It wraps the Mamba Labs Company Contact Details Extractor actor on Apify and returns a Clay-ready flat JSON row to any MCP client.
+An MCP server that finds a company contact page and extracts role emails, a phone number and a postal address. It wraps the Mamba Labs [Company Role Email, Phone and Address Finder](https://apify.com/mambalabs/company-contact-details-extractor) actor on Apify and returns a Clay-ready flat JSON row to any MCP client.
 
 ## What's Inside
 
